@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+                        http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+    version="3.1">
+    
+  <display-name>RestSpringWebService</display-name>
+  
+    <servlet>
+        <!-- This will look the file in WEB-INF folder restWS-dispatcher-servlet.xml -->
+        <servlet-name>RestSpringWS-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/restWS-dispatcher-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+        <servlet-mapping>
+        <servlet-name>RestSpringWS-dispatcher</servlet-name>
+        <url-pattern>/webapi/*</url-pattern>
+        <url-pattern>*.do</url-pattern>
+        <url-pattern>*.html</url-pattern>
+        <url-pattern>*.htm</url-pattern>
+        <url-pattern>*.json</url-pattern>
+        <url-pattern>*.xml</url-pattern>
+    </servlet-mapping>
+    
+  <!-- This is best practice to separate configuration information in different file.  -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:/META-INF/spring/app-context.xml</param-value>
+    </context-param>
+    
+    <!-- Because of below listener. Spring will look for applicationContext.xml -->
+    <listener>
+	      <listener-class>
+	               org.springframework.web.context.ContextLoaderListener
+	      </listener-class>
+    </listener>
+    
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- This filter is used for spring security. -->
+<!--     <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>contextConfigLocationSecurity</param-name>
+            <param-value>/WEB-INF/ole-security.xml</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping> -->
+    
+    <!-- This filter is to fix lazy initialisation. e.g. a class has a reference 
+        of another class and we fetch data of first class other object of other class 
+        will be null or throw a exception. We are saying spring that fetch the data 
+        for all reference variables. But this can impact on the performance of the 
+        system. Becase a nested clases will get the data in single hit. -->
+    <!-- <filter>
+        <filter-name>oemInViewFilter</filter-name>
+        <filter-class>org.sprinframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+        <init-param>
+            <param-name>entityManagerFactoryBeanName</param-name>
+            <param-value>emf</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>oemInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping> -->
+</web-app>
