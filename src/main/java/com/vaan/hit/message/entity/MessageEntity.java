@@ -2,8 +2,20 @@ package com.vaan.hit.message.entity;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+/**
+ * @author Rohit
+ *
+ *	
+ */
+@Entity
 public class MessageEntity {
 	
+	@Id
+	@GeneratedValue
 	private long id;
 	private String message;
 	private Date created;
@@ -15,8 +27,7 @@ public class MessageEntity {
 		// No argument Constructor  
 	}
 
-	public MessageEntity(long id, String message, String author) {
-		this.id = id;
+	public MessageEntity(String message, String author) {
 		this.message = message;
 		this.created = new Date();
 		this.author = author;
