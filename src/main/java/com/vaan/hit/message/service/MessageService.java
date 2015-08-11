@@ -12,6 +12,15 @@ import com.vaan.hit.message.entity.MessageEntity;
  */
 @Service
 public interface MessageService {
+
 	public List<MessageEntity> messageLst();
-	
+
+	public MessageEntity getMessageByID(Long messageID);
+
+	public MessageEntity addMessage(MessageEntity messageEntity);
+
+	public void deleteMessage(Long messageID);
+
+	public MessageEntity updateMessage(MessageEntity messageEntity);
+
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Rohit
@@ -12,6 +13,7 @@ import javax.persistence.Id;
  *	
  */
 @Entity
+@XmlRootElement
 public class MessageEntity {
 	
 	@Id
