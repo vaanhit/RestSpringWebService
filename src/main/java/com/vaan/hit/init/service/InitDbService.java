@@ -29,7 +29,19 @@ public class InitDbService {
 	 */
 	@PostConstruct
 	private void init() {
-		MessageEntity msgEntity = new MessageEntity("message 1", "Rohit");
+		
+		for (int i =0;i<20; i ++) {
+			
+			if(i<=10) {
+				MessageEntity msgEntity = new MessageEntity("message " + i, "Rohit");
+				messageRepository.save(msgEntity);
+			} else {
+				MessageEntity msgEntity1 =  new MessageEntity("message " + i, "Bhatia");
+				messageRepository.save(msgEntity1);
+			}
+			
+		}
+		/*MessageEntity msgEntity = new MessageEntity("message 1", "Rohit");
 		messageRepository.save(msgEntity);
 
 		MessageEntity msgEntity1 = new MessageEntity("message 2", "Rohit");
@@ -39,7 +51,7 @@ public class InitDbService {
 		messageRepository.save(msgEntity2);
 		
 		MessageEntity msgEntity3 = new MessageEntity("message 4", "Rohit");
-		messageRepository.save(msgEntity3);
+		messageRepository.save(msgEntity3);*/
 	}
 
 }

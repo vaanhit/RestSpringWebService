@@ -5,6 +5,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 
 import com.vaan.hit.message.entity.MessageEntity;
@@ -28,8 +32,11 @@ public class MessageServiceImpl implements MessageService {
 	public List<MessageEntity> messageLst() {
 		logger.info(" ---------- Inside message Repository -------------------");
 		List<MessageEntity> mstLst = messageRepository.findAll();
+		
+	/*	Page<MessageEntity> mstLst1 = (List)   messageRepository.findAll(new PageRequest(0, 5, Direction.DESC, "author"));
+		logger.info("size of page    ------       "     + mstLst1.size());*/
+		
 		logger.info(" ---------- Got all message -------------------");
-
 		return mstLst;
 	}
 
